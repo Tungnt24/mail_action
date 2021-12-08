@@ -8,7 +8,13 @@ def read_file(file_name: str) -> list:
     return accounts
 
 
-def imap_login(host: str, email: str, password: str) -> imap_client.IMAPClient:
-    client = imap_client.new_imap_client(host)
+def imap_login(host: str, port:int, email: str, password: str) -> imap_client.IMAPClient:
+    client = imap_client.new_imap_client(host, port)
     imap_client.login(client, email, password)
     return client
+
+def get_mail_junk(client: imap_client.IMAPClient, folder_name: str):
+    client.select_folder(folder_name)
+    uids = client.search()
+
+

@@ -8,7 +8,7 @@ def read_file(file_name: str) -> list:
     return accounts
 
 
-def imap_login(host: str, port: int, email: str, password: str) -> imap_client.IMAPClient:
-    client = imap_client.new_imap_client(host, port)
+def imap_login(host: str, email: str, password: str) -> imap_client.IMAPClient:
+    client = imap_client.new_imap_client(host)
     imap_client.login(client, email, password)
     return client

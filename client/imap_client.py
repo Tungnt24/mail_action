@@ -14,7 +14,7 @@ MOVED = "$Moved"
 
 
 def new_imap_client(
-    host: str, port: int = 143
+    host: str, port: int = 143, ssl: bool=True
 ) -> IMAPClient:
     """Connect to imap server.
 
@@ -22,8 +22,9 @@ def new_imap_client(
 
     """
     try:
-        client = IMAPClient(host, port=port, ssl=False)
-        client.starttls()
+        client = IMAPClient(host, port, ssl)
+        if not ssl:
+            client.starttls()
         return client
     except Exception as e:
         logger.error(
